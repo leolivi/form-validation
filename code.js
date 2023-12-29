@@ -543,6 +543,9 @@ function validateForm(event) {
     if (Object.keys(validationErrors). length > 0) {
         displayError(validationErrors);
     } else {
-        console.log("Data sent to backend");
+        // console.log("Thank you for your message!");
+        const successMessage = document.getElementById("successMessage");
+        successMessage.style.display = "block";
+        console.log(successMessage);
     }
 };

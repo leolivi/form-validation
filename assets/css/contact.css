@@ -87,6 +87,13 @@ form .error {
     margin-left: 2rem;
 }
 
+form .success {
+    width: 80%;
+    margin-top: -1rem;
+    margin-left: 2rem;
+    text-align: center;
+}
+
 .contact-container .button {
     text-decoration: none;
     display: -webkit-box;
@@ -135,6 +142,10 @@ form .error {
     }
 
     form .error {
+        width: 100%;
+    }
+
+    form .success {
         width: 100%;
     }
 }

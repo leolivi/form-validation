@@ -79,3 +79,9 @@ h3 {
     font-size: clamp(var(--blocktext-mobile-size), 2vw, var(--blocktext-size));
     font-family: var(--body-font);
 }
+
+.success {
+    color: var(--KC-orange);
+    font-size: clamp(var(--blocktext-mobile-size), 2vw, var(--blocktext-size));
+    font-family: var(--body-font);
+}
