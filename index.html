@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
     <!-- links -->
-    <link rel="icon" type="image/svg+xml" href="assets/illustrations/icons/logo/KC-favicon.svg">
-    <link rel="icon" type="image/png" href="assets/illustrations/icons/logo/KC-favicon.png">
     <link rel="stylesheet" href="assets/css/reset-variables.css">
     <link rel="stylesheet" href="assets/css/typografie.css">
     <link rel="stylesheet" href="assets/css/contact.css">
@@ -51,9 +49,10 @@
                 <label for="message"></label>
                 <textarea name="message" id="message" cols="30" rows="10" placeholder="Message*" required aria-label="Your Message"></textarea>
 
+                <div id="successMessage" class="success" style="display: none;">Thank you for your Message!</div>
+
                 <input id="submit" type="submit" value="send" class="button" aria-label="Send">
 
-                <div id="successMessage" class="success" style="display: none;">Thank you for your Message!</div>
             </form>
         </div>
     </section>

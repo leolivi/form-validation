@@ -13,15 +13,11 @@
 }
 
 .contact-container form {
-    display: -webkit-box;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 1.5rem;
-    -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
 }
 
 form .title-select {
@@ -96,10 +92,8 @@ form .success {
 
 .contact-container .button {
     text-decoration: none;
-    display: -webkit-box;
     display: flex;
-    -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     align-self: center;
     padding: 1rem 0;
     background-color: var(--KC-orange);
@@ -142,10 +136,14 @@ form .success {
     }
 
     form .error {
-        width: 100%;
+        width: 95%;
+        margin-top: 0rem;
+        margin-left: 0rem;
     }
 
     form .success {
-        width: 100%;
+        width: 95%;
+        margin-top: 0rem;
+        margin-left: 0rem;
     }
 }
