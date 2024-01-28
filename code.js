@@ -1,82 +1,403 @@
 /* Focus Out Validation */
-// Function to clear error messages
-function clearErrorMessages() {
+
+// Select
+document.querySelector(".title-select").addEventListener("focusout", validateTitle);
+
+function validateTitle(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
     const spans = document.querySelectorAll("form span");
     spans.forEach((span) => {
         span.remove();
     });
-}
 
-// Function to display error messages
-function displayError(fieldId, errorMessage) {
-    const errorDisplay = document.createElement("span");
-    errorDisplay.classList.add("error");
-    errorDisplay.innerHTML = errorMessage;
-    document.querySelector(fieldId).after(errorDisplay);
-}
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
 
-// Function to perform field validation
-function validateField(fieldId, dataKey, regex, emptyErrorMessage, invalidErrorMessage) {
-    const fieldValue = document.querySelector(fieldId).value;
-    const validationErrors = {};
+    data.selectTitle = document.querySelector(".title-select").value;
 
-    if (!fieldValue) {
-        validationErrors[dataKey] = emptyErrorMessage;
+    if (data.selectTitle === "") {
+        validationErrors.selectTitle = "Please select a title";
     } else {
-        if (!regex.test(fieldValue)) {
-            validationErrors[dataKey] = invalidErrorMessage;
-        } else {
-            console.info(dataKey + ": ", fieldValue);
+        console.info("Title: ", data.selectTitle)
+    }
+
+    function displayError(validationErrors) {
+        if (validationErrors.selectTitle) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.selectTitle;
+            document.querySelector(".title-select").after(errorDisplay);
         }
     }
 
-    return validationErrors;
-}
-
-// Function to handle form field focusout events
-function handleFocusOut(event, fieldId, dataKey, regex, emptyErrorMessage, invalidErrorMessage) {
-    event.preventDefault();
-    clearErrorMessages();
-
-    const validationErrors = validateField(fieldId, dataKey, regex, emptyErrorMessage, invalidErrorMessage);
-
-    if (Object.keys(validationErrors).length > 0) {
-        displayError(fieldId, validationErrors[dataKey]);
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
     } else {
         console.log("Data sent to backend");
     }
 }
 
-// Event listeners for each field
-document.querySelector("#first-name").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#first-name", "firstName", /^[A-Za-z\s]+$/, "Please enter your first name", "Please enter a valid first name");
-});
+// First Name
+document.querySelector("#first-name").addEventListener("focusout", validateFirstName);
 
-document.querySelector("#last-name").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#last-name", "lastName", /^[A-Za-z\s]+$/, "Please enter your last name", "Please enter a valid last name");
-});
+function validateFirstName(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
 
-document.querySelector("#address").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#address", "address", /^[A-Za-z0-9\s]+$/, "Please enter your address", "Please enter a valid address");
-});
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
 
-document.querySelector("#postalcode").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#postalcode", "postalCode", /^\d{4}$/, "Please enter your postal code", "Your postal code must have 4 digits (CH)");
-});
+     // properties for data object
+     data.firstName = document.querySelector("#first-name").value;
 
-document.querySelector("#city").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#city", "city", /^[A-Za-z\s]+$/, "Please enter your city", "Please enter a valid city");
-});
+     // Form validation first name
+     if (!data.firstName) {
+        validationErrors.firstName = "Please enter your first name";
+     } else {
+        // variable for name Regex
+        const nameRegex = /^[A-Za-zÄäÖöÜüÉéÈèÔô\s]+$/;
+        // check if name is valid
+        if (!nameRegex.test(data.firstName)) {
+            validationErrors.firstName = "Please enter a valid first name";
+        } else {
+            console.info("First name: ", data.firstName);
+        }
+     };
 
-document.querySelector("#email").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#email", "email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please enter your email", "Please enter a valid email address");
-});
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.firstName) {
+            // create span Element
+            const errorDisplay = document.createElement("span");
+            // add class to span
+            errorDisplay.classList.add("error");
+            // add error to span
+            errorDisplay.innerHTML = validationErrors.firstName;
+            // add error message
+            document.querySelector("#first-name").after(errorDisplay);
+        }
+     };
 
-document.querySelector("#message").addEventListener("focusout", (event) => {
-    handleFocusOut(event, "#message", "message", null, "Please enter a message", "Your message is too short (min. 10 characters)");
-});
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
 
+// Last Name
+document.querySelector("#last-name").addEventListener("focusout", validateLastName);
 
+function validateLastName(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.lastName = document.querySelector("#last-name").value;
+
+     // Form validation last name
+     if (!data.lastName) {
+        validationErrors.lastName = "Please enter your last name";
+     } else {
+        // variable for name Regex
+        const nameRegex = /^[A-Za-zÄäÖöÜüÉéÈèÔô\s]+$/;
+        // check if name is valid
+        if (!nameRegex.test(data.lastName)) {
+            validationErrors.lastName = "Please enter a valid last name";
+        } else {
+            console.info("Last name: ", data.lastName);
+        }
+     };
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.lastName) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.lastName;
+            document.querySelector("#last-name").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
+
+// Address
+document.querySelector("#address").addEventListener("focusout", validateAddress);
+
+function validateAddress(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.address = document.querySelector('#address').value;
+
+     // Form validation address
+     if (!data.address) {
+        validationErrors.address = "Please enter your address";
+     } else {
+        // variable for name Regex
+        const addressRegex = /^[A-Za-z0-9\s]+$/;
+        // check if name is valid
+        if (!addressRegex.test(data.address)) {
+            validationErrors.address = "Please enter a valid address";
+        } else {
+            console.info("Address: ", data.address);
+        }
+     };
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.address) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.address;
+            document.querySelector("#address").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
+
+// Postal Code
+document.querySelector("#postalcode").addEventListener("focusout", validatePostalCode);
+
+function validatePostalCode(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.postalCode = document.querySelector('#postalcode').value;
+
+     // Form validation address
+     if (!data.postalCode) {
+        validationErrors.postalCode = "Please enter your postal code"
+    } else {
+        // variable for postal code Regec
+        const plzRegex = /^\d{4,6}$/;
+        // check if message has 4 digits 
+        if (!plzRegex.test(data.postalCode)) {
+            validationErrors.postalCode = "Your postal code must have 4 digits (CH)";
+        } else {
+            console.info("Postal code: ", data.postalCode);
+        }
+    }
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.postalCode) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.postalCode;
+            document.querySelector("#postalcode").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
+
+// City
+document.querySelector("#city").addEventListener("focusout", validateCity);
+
+function validateCity(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.city = document.querySelector('#city').value;
+
+    // Form validation for city
+    if (!data.city) {
+        validationErrors.city = "Please enter your city";
+     } else {
+        // variable for city Regex
+        const cityRegex = /^[A-Za-z\s]+$/;
+        // check if city name is valid
+        if (!cityRegex.test(data.city)) {
+            validationErrors.city = "Please enter a valid city";
+        } else {
+            console.info("City: ", data.city);
+        }
+     };
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.city) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.city;
+            document.querySelector("#city").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
+
+// Email
+document.querySelector("#email").addEventListener("focusout", validateEmail);
+
+function validateEmail(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.email = document.querySelector("#email").value;
+
+     // Form validation email
+     if (!data.email) {
+        validationErrors.email = "Please enter your email";
+     } else {
+        // variable for email Regex
+        const emailRegex = /^[^\s@]+@[^\s@]+[^\s@]+$/;
+        // check if email address is valid
+        if (!emailRegex.test(data.email)) {
+            validationErrors.email = "Please enter a valid email address";
+        } else {
+            console.info("Email: ", data.email);
+        }
+     }
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.email) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.email;
+            document.querySelector("#email").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
+
+// Message
+document.querySelector("#message").addEventListener("focusout", validateMessage);
+
+function validateMessage(event) {
+    event.preventDefault();
+     // delete error messages to refill the fields
+    const spans = document.querySelectorAll("form span");
+    spans.forEach((span) => {
+        span.remove();
+    });
+
+     // store input in data object
+     let data = {};
+     // store errors in object
+     let validationErrors = {};
+
+     // properties for data object
+     data.message = document.querySelector("#message").value;
+
+     // Form validation for message
+     if (!data.message) {
+        validationErrors.message = "Please enter a message"
+    } else {
+        // check if message is longer than 10 characters 
+        if (data.message.length < 11) {
+            validationErrors.message = "Your message is too short (min. 10 characters)";
+        } else {
+            console.info("Message: ", data.message);
+        }
+    }
+
+     // display error messages in the validationErrors object
+     function displayError(validationErrors) {
+        if (validationErrors.message) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.message;
+            document.querySelector("#message").after(errorDisplay);
+        }
+     };
+
+    // send data to backend when no errors
+    if (Object.keys(validationErrors). length > 0) {
+        displayError(validationErrors);
+    } else {
+        console.log("Data sent to backend");
+    }
+};
 
 /* Submit Validation */
 // add eventListener to the submit button
@@ -97,6 +418,7 @@ function validateForm(event) {
      let validationErrors = {};
 
      // properties for data object
+     data.selectTitle = document.querySelector(".title-select").value;
      data.firstName = document.querySelector("#first-name").value;
      data.lastName = document.querySelector("#last-name").value;
      data.address = document.querySelector('#address').value;
@@ -104,13 +426,21 @@ function validateForm(event) {
      data.city = document.querySelector('#city').value;
      data.email = document.querySelector("#email").value;
      data.message = document.querySelector("#message").value;
+     data.checkbox = document.querySelector("#box").value;
+
+    // Form valitation select options
+    if (data.selectTitle === "") {
+        validationErrors.selectTitle = "Please select a title";
+    } else {
+        console.info("Title: ", data.selectTitle)
+    }
 
      // Form validation first name
      if (!data.firstName) {
         validationErrors.firstName = "Please enter your first name";
      } else {
         // variable for name Regex
-        const nameRegex = /^[A-Za-z\s]+$/;
+        const nameRegex = /^[A-Za-zÄäÖöÜüÉéÈèÔô\s]+$/;
         // check if name is valid
         if (!nameRegex.test(data.firstName)) {
             validationErrors.firstName = "Please enter a valid first name";
@@ -124,7 +454,7 @@ function validateForm(event) {
         validationErrors.lastName = "Please enter your last name";
      } else {
         // variable for name Regex
-        const nameRegex = /^[A-Za-z\s]+$/;
+        const nameRegex = /^[A-Za-zÄäÖöÜüÉéÈèÔô\s]+$/;
         // check if name is valid
         if (!nameRegex.test(data.lastName)) {
             validationErrors.lastName = "Please enter a valid last name";
@@ -152,7 +482,7 @@ function validateForm(event) {
         validationErrors.postalCode = "Please enter your postal code"
     } else {
         // variable for postal code Regec
-        const plzRegex = /^\d{4}$/;
+        const plzRegex = /^\d{4,6}$/;
         // check if message has 4 digits 
         if (!plzRegex.test(data.postalCode)) {
             validationErrors.postalCode = "Your postal code must have 4 digits (CH)";
@@ -180,7 +510,7 @@ function validateForm(event) {
         validationErrors.email = "Please enter your email";
      } else {
         // variable for email Regex
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+[^\s@]+$/;
         // check if email address is valid
         if (!emailRegex.test(data.email)) {
             validationErrors.email = "Please enter a valid email address";
@@ -201,9 +531,23 @@ function validateForm(event) {
         }
     }
 
+    // Form validation for checkbox
+    if (!box.checked) {
+        validationErrors.box = "Please confirm the checkbox"
+    } else {
+        console.info("Checkbox confirmed");
+    }
+
 
     // display error messages in the validationErrors object
     function displayError(validationErrors) {
+        if (validationErrors.selectTitle) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.selectTitle;
+            document.querySelector(".title-select").after(errorDisplay);
+        }
+
         if (validationErrors.firstName) {
             // create span Element
             const errorDisplay = document.createElement("span");
@@ -255,6 +599,13 @@ function validateForm(event) {
             errorDisplay.classList.add("error");
             errorDisplay.innerHTML = validationErrors.message;
             document.querySelector("#message").after(errorDisplay);
+        }
+
+        if (validationErrors.box) {
+            const errorDisplay = document.createElement("span");
+            errorDisplay.classList.add("error");
+            errorDisplay.innerHTML = validationErrors.box;
+            document.querySelector(".checkbox").after(errorDisplay);
         }
     };
 

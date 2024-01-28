@@ -30,7 +30,29 @@ form .title-select {
     padding: 1rem 1rem;
     text-decoration: none;
     margin-top: 1.5rem;
+    -moz-appearance: none;
+         appearance: none;
+    -webkit-appearance: none;
+    background-image: url(../illustrations/illustration-arrow-down-form.svg);
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: 95%;
 }
+
+select:active {
+    border: 3px solid var(--KC-orange);
+}
+
+select:hover {
+    border: 3px solid var(--KC-orange);
+}
+
+/* form i {
+    align-self: flex-end;
+    margin-right: 120px;
+    transform: translateY(-62px);
+    height: 0rem;
+} */
 
 .contact-container form input {
     height: 4rem;
@@ -59,7 +81,6 @@ form .title-select {
     border: none;
 }
 
-
 .contact-container form textarea {
     width: 80%;
     height: 15rem;
@@ -75,6 +96,47 @@ form .title-select {
 
 .contact-container form textarea:focus {
     border: 3px solid var(--KC-orange);
+}
+
+.checkbox {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    width: 78%;
+
+    a {
+        color: var(--KC-orange);
+    }
+
+    a:visited {
+        color: var(--KC-orange);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    #box:hover {
+        border: 3px solid var(--KC-orange);
+    }
+
+    #box:checked ~.new-checkbox {
+        background-color: var(--KC-orange);
+    }
+}
+
+#box {
+    /* opacity: 0;
+    height: 0;
+    width: 0; */
+    width: 1.3rem;
+    height: auto;
+    color: var(--KC-brown);
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
 }
 
 form .error {
@@ -123,6 +185,12 @@ form .success {
         padding: 2rem 0;
     }
 
+    form i {
+        align-self: flex-end;
+        margin-right: 25px;
+        transform: translateY(-62px);
+    }
+
     .contact-container form textarea {
         width: 100%;
     }
@@ -132,6 +200,10 @@ form .success {
     }
 
     .contact-container form input {
+        width: 100%;
+    }
+
+    .checkbox {
         width: 100%;
     }
 
@@ -145,5 +217,16 @@ form .success {
         width: 95%;
         margin-top: 0rem;
         margin-left: 0rem;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .checkbox {
+    gap: 0.5rem;
+
+        .new-checkbox {
+            width: 0.9rem;
+            height: 0.9rem;
+        }
     }
 }

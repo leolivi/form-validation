@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="code.js" defer></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         <h2>Contact me</h2>
         <div class="contact-container">
             <form action="#">
-                <select name="title" id=title-select" class="title-select">
+                <select name="title" id=title-select" class="title-select" required>
                     <option value="">--Choose your title--</option>
                     <option value="Mr">Mr</option>
                     <option value="Ms">Ms</option>
@@ -27,34 +28,39 @@
                     <option value="Mx">Mx</option>
                     <option value="X">Prefer not to say</option>
                 </select>
+                <!-- <i class="fa-solid fa-chevron-down"></i> -->
 
                 <label for="first-name"></label>
-                <input type="text" name="firstname" id="first-name" placeholder="first name*" required aria-label="Your first name">
+                <input type="text" name="firstname" id="first-name" placeholder="first name" required aria-label="Your first name">
 
                 <label for="last-name"></label>
-                <input type="text" name="lastname" id="last-name" placeholder="last name*" required aria-label="Your last name">
+                <input type="text" name="lastname" id="last-name" placeholder="last name" required aria-label="Your last name">
 
                 <label for="address"></label>
-                <input type="text" name="address" id="address" class="focusout" placeholder="address*" required aria-label="Your address">
+                <input type="text" name="address" id="address" class="focusout" placeholder="address" required aria-label="Your address">
 
                 <label for="postalcode"></label>
-                <input type="text" name="postalcode" id="postalcode" class="focusout" placeholder="postal code*" required aria-label="Your postal code">
+                <input type="number" name="postalcode" id="postalcode" class="focusout" placeholder="postal code" required aria-label="Your postal code">
 
                 <label for="city"></label>
-                <input type="text" name="city" id="city" placeholder="city*" required aria-label="Your city">
+                <input type="text" name="city" id="city" placeholder="city" required aria-label="Your city">
 
                 <label for="email"></label>
-                <input type="email" name="e-mail" id="email" placeholder="e-mail*" required aria-label="Your Email Address">
+                <input type="email" name="e-mail" id="email" placeholder="e-mail" required aria-label="Your Email Address">
 
                 <label for="message"></label>
-                <textarea name="message" id="message" cols="30" rows="10" placeholder="Message*" required aria-label="Your Message"></textarea>
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Message" required aria-label="Your Message"></textarea>
+                
+                <label class="checkbox">
+                    <input type="checkbox" id="box" class="box" required>
+                    <div>I have read the <a href="#">data protection policy</a> and agree.</div>
+                </label>
 
-                <div id="successMessage" class="success" style="display: none;">Thank you for your Message!</div>
+                <div id="successMessage" class="success" style="display: none; margin-top: 1rem;">Thank you for your Message!</div>
 
                 <input id="submit" type="submit" value="send" class="button" aria-label="Send">
 
             </form>
         </div>
     </section>
-    <script src="code.js"></script>
 </body>
